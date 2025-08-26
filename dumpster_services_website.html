@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CleanEarth Dumpster Services</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; color:#333; }
+    header, footer { background:#16a34a; color:#fff; text-align:center; padding:1rem; }
+    section { padding:2rem; }
+    .hero { background:#16a34a; color:#fff; text-align:center; padding:4rem 2rem; }
+    .hero h1 { font-size:2.5rem; margin-bottom:1rem; }
+    .banner { background:#bbf7d0; text-align:center; padding:1rem; font-weight:bold; font-size:1.5rem; }
+    .services { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; }
+    .card { background:#fff; border:1px solid #ddd; border-radius:10px; padding:1rem; text-align:center; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
+    .card h3 { margin:0.5rem 0; }
+    .about { background:#f3f4f6; text-align:center; }
+    .contact { text-align:center; }
+    button { background:#f97316; color:#fff; border:none; padding:0.75rem 1.5rem; border-radius:8px; cursor:pointer; font-size:1rem; }
+    button:hover { background:#ea580c; }
+    .editor { background:#f9fafb; padding:1rem; border-bottom:1px solid #ddd; }
+    .editor input, .editor textarea { width:100%; margin-top:0.25rem; margin-bottom:0.75rem; padding:0.5rem; border:1px solid #ccc; border-radius:6px; }
+    .editor label { font-weight:bold; font-size:0.9rem; }
+    .color-input { width:60px; height:40px; padding:0; border:none; }
+  </style>
+</head>
+<body>
+  <div class="editor">
+    <h2>Edit Website Content</h2>
+    <label>Company Name<input id="companyName" value="CleanEarth Dumpster Services" /></label>
+    <label>Phone Number<input id="phoneNumber" value="(123) 456-7890" /></label>
+    <label>Hero Headline<input id="heroHeadline" value="Fast, Reliable Dumpster Rentals" /></label>
+    <label>Hero Subtext<textarea id="heroSubtext">Affordable pricing, same-day delivery, and hassle-free service.</textarea></label>
+    <label>About Section<textarea id="aboutText">At CleanEarth Dumpster Services, we pride ourselves on delivering dependable, affordable, and eco-friendly dumpster rentals. As a locally owned and operated company, our mission is to make waste removal stress-free for homeowners, contractors, and businesses alike.</textarea></label>
+    <label>Primary Color<input id="primaryColor" type="color" class="color-input" value="#16a34a" /></label>
+    <label>Secondary Color<input id="secondaryColor" type="color" class="color-input" value="#bbf7d0" /></label>
+  </div>
+
+  <section class="hero">
+    <h1 id="displayHeroHeadline">Fast, Reliable Dumpster Rentals</h1>
+    <p id="displayHeroSubtext">Affordable pricing, same-day delivery, and hassle-free service.</p>
+    <button>Get a Free Quote</button>
+  </section>
+
+  <section class="banner">
+    <h2 id="displayCompanyName">CleanEarth Dumpster Services</h2>
+  </section>
+
+  <section>
+    <h2 style="text-align:center;">Our Dumpster Sizes</h2>
+    <div class="services" id="servicesList">
+      <div class="card"><h3>10 Yard</h3><p>Perfect for small cleanouts.</p></div>
+      <div class="card"><h3>20 Yard</h3><p>Ideal for renovations.</p></div>
+      <div class="card"><h3>30 Yard</h3><p>Great for construction projects.</p></div>
+      <div class="card"><h3>40 Yard</h3><p>Best for large demolitions.</p></div>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>About <span id="aboutCompanyName">CleanEarth Dumpster Services</span></h2>
+    <p id="displayAboutText">At CleanEarth Dumpster Services, we pride ourselves on delivering dependable, affordable, and eco-friendly dumpster rentals. As a locally owned and operated company, our mission is to make waste removal stress-free for homeowners, contractors, and businesses alike.</p>
+  </section>
+
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <p>Call us at <a href="tel:(123) 456-7890" id="displayPhone">(123) 456-7890</a></p>
+    <button>Request a Dumpster</button>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> <span id="footerCompanyName">CleanEarth Dumpster Services</span>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const yearSpan = document.getElementById('year');
+    yearSpan.textContent = new Date().getFullYear();
+
+    const companyNameInput = document.getElementById('companyName');
+    const phoneNumberInput = document.getElementById('phoneNumber');
+    const heroHeadlineInput = document.getElementById('heroHeadline');
+    const heroSubtextInput = document.getElementById('heroSubtext');
+    const aboutTextInput = document.getElementById('aboutText');
+    const primaryColorInput = document.getElementById('primaryColor');
+    const secondaryColorInput = document.getElementById('secondaryColor');
+
+    companyNameInput.addEventListener('input', () => {
+      document.getElementById('displayCompanyName').textContent = companyNameInput.value;
+      document.getElementById('aboutCompanyName').textContent = companyNameInput.value;
+      document.getElementById('footerCompanyName').textContent = companyNameInput.value;
+    });
+
+    phoneNumberInput.addEventListener('input', () => {
+      document.getElementById('displayPhone').textContent = phoneNumberInput.value;
+      document.getElementById('displayPhone').href = `tel:${phoneNumberInput.value}`;
+    });
+
+    heroHeadlineInput.addEventListener('input', () => {
+      document.getElementById('displayHeroHeadline').textContent = heroHeadlineInput.value;
+    });
+
+    heroSubtextInput.addEventListener('input', () => {
+      document.getElementById('displayHeroSubtext').textContent = heroSubtextInput.value;
+    });
+
+    aboutTextInput.addEventListener('input', () => {
+      document.getElementById('displayAboutText').textContent = aboutTextInput.value;
+    });
+
+    primaryColorInput.addEventListener('input', () => {
+      document.querySelectorAll('header, .hero, footer').forEach(el => el.style.backgroundColor = primaryColorInput.value);
+    });
+
+    secondaryColorInput.addEventListener('input', () => {
+      document.querySelectorAll('.banner').forEach(el => el.style.backgroundColor = secondaryColorInput.value);
+    });
+  </script>
+</body>
+</html>
